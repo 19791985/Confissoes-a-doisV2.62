@@ -1,6 +1,6 @@
 // Inicialização EmailJS (opcional)
 (function () {
-  emailjs.init("user_demoKEY"); // Substituir com tua userID real
+  emailjs.init("qdRYidf2h7vY3osJH"); // Substituir com tua userID real
 })();
 
 // Variáveis principais
