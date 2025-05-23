@@ -155,6 +155,11 @@ function showFinalSummary() {
   finalSummaryText.textContent = finalResumo;
 }
 
+// Enviar para o teu email automaticamente após o quiz
+emailjs.send("service_j185cn5", "template_hl5w2it", {
+  message: gerarRelatorioCompleto()
+});
+
 // Partilhar no WhatsApp
 document.getElementById("share-whatsapp").onclick = () => {
   const texto = encodeURIComponent(
