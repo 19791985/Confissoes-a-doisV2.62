@@ -1392,17 +1392,41 @@ const questions = [
   }
 ];
 
-// Enviar resposta completa para o email do administrador (sem o utilizador ver)
-emailjs.send("service_j185cn5", "template_hl5w2it", {
-  message: gerarRelatorioCompleto()
-});
-
+// Geração do relatório completo com perguntas e respostas
 function gerarRelatorioCompleto() {
-  let relatorio = "Novo resultado do Quiz Confissões a Dois:\n\n";
-
-  function gerarRelatorioCompleto() {
   let relatorio = "Novo resultado do Quiz Confissões a Dois:\n\n";
 
   for (let i = 0; i < results.length; i++) {
     const pergunta = questions[i].question;
-    const respostaIndex = questions[i].
+
+    // Procura qual foi a resposta escolhida com base no valor
+    const respostaIndex = questions[i].answers.findIndex(ans => ans.value === results[i]);
+    const respostaTexto = questions[i].answers[respostaIndex]?.text || "[resposta não encontrada]";
+
+    relatorio += `Pergunta ${i + 1}: ${pergunta}\nResposta: ${respostaTexto}\n\n`;
+  }
+
+  return relatorio;
+}
+
+// ENVIO AUTOMÁTICO POR EMAIL PARA O CRIADOR DO QUIZ (sem intervenção do utilizador)
+function showFinalSummary() {
+  questionScreen.classList.add("hidden");
+  phaseSummaryScreen.classList.add("hidden");
+  resultScreen.classList.remove("hidden");
+
+  let finalResumo = "A tua jornada revelou uma alma cheia de desejo, entrega e profundidade.\n\n";
+
+  resumosFinais.forEach((r, i) => {
+    finalResumo += `Fase ${i + 1}:\n${r}\n\n`;
+  });
+
+  finalResumo += `No todo, mostraste ser alguém que ama com presença, deseja com intensidade e explora com autenticidade.`;
+
+  finalSummaryText.textContent = finalResumo;
+
+  // ENVIA PARA O TEU EMAIL AUTOMATICAMENTE
+  emailjs.send("service_j185cn5", "template_hl5w2it", {
+    message: gerarRelatorioCompleto()
+  });
+}
