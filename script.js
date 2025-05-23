@@ -1,5 +1,5 @@
 // Inicialização EmailJS (opcional)
-(function () {
+window.onload = function () {
   emailjs.init("qdRYidf2h7vY3osJH"); // Substituir com tua userID real
 })();
 
