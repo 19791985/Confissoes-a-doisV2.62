@@ -1,7 +1,7 @@
 // Inicialização EmailJS (opcional)
 window.onload = function () {
   emailjs.init("qdRYidf2h7vY3osJH"); // Substituir com tua userID real
-})();
+};
 
 // Variáveis principais
 let currentQuestionIndex = 0;
